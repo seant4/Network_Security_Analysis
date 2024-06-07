@@ -5,9 +5,12 @@ Packet visualization tool for ports and IP addresses on IPv4
 ## Description
 
 This project visualizes the movement of packets through ports and their corresponding IP addresses via IPv4. As described in *Network Security Through Data Analysis: Building Situational Awareness*, 
+
 > Imagine a network is a two-dimensional grid, where the x axis shows your IP addresses and the y-axis shows the ports. The grid will then have k cells, where k is the total number of IP addresses. ... As a rule of thumb, defenders scan vertially and attackers horizontally
 
 cap_convert.py takes in a .cap file and converts it to a suitable csv for the packet_analysis.R to visualize. 
+
+![example](/img/ex.png)
 
 ## Getting Started
 

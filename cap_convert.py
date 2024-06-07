@@ -5,7 +5,7 @@ import threading
 import os
 import time
 
-# PATH = "path/to/cap"
+PATH = ""
 print("Capturing packets")
 
 def convert_capture(capture):
@@ -24,6 +24,6 @@ def convert_capture(capture):
     df = pd.DataFrame(data)
     df.to_csv("table.csv")
 
-#cap = rdpcap(path) #Pull from file
+cap = rdpcap(PATH) #Pull from file
 #cap = sniff(count=10)
 convert_capture(cap)
