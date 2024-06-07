@@ -1,0 +1,54 @@
+---
+title: "Pcap Analysis"
+author: "Sean Theisen"
+date: "2024-06-07"
+output: 
+  flexdashboard::flex_dashboard:
+      orientation: columns
+      vertical_layout: fill
+---
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(ggplot2)
+library(heatmaply)
+```
+
+```{r}
+dataset <- eventReactive(input$file1,{
+dataset <- read.csv(input$file1$datapath)
+})
+```
+
+# Column {.sidebar}
+
+```{r, echo = FALSE}
+fileInput("file1", "Choose CSV File",
+                multiple = TRUE,
+                accept = c("text/csv",
+                         "text/comma-separated-values,text/plain",
+                         ".csv"))
+```
+# Heatmap
+## Column
+```{r, echo=FALSE}
+renderPlot({
+  table <- dataset()
+  table <- table[,-1]
+  destination <- data.frame(table[,2], table[,4])
+  names(destination) <- c("Destination IP", "Destination Port")
+  dtable <- as.data.frame(table(destination))
+  ggplot(dtable, aes(Destination.IP, Destination.Port, fill=Freq)) + geom_tile()
+})
+```
+## Column
+```{r, echo=FALSE}
+renderPlot({
+  table <- dataset()
+  table <- table[,-1]
+  source <- data.frame(table[,1], table[,3])
+  names(source) <- c("Source IP", "Source Port")
+  stable <- as.data.frame(table(source))
+  ggplot(stable, aes(Source.IP, Source.Port, fill=Freq)) + geom_tile()
+})
+```
+
